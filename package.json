@@ -1,0 +1,23 @@
+{
+  "name": "rakenduste_programmeerimine_2019s",
+  "version": "1.0.0",
+  "description": "",
+  "main": "\u001b[D\u001b[D\u001b[D\u001b[C\u001b[D\u001b[D\u001b[D\u001b[D1\u001b[C\u001b[index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priilau/rakenduste_programmeerimine_2019s.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/priilau/rakenduste_programmeerimine_2019s/issues"
+  },
+  "homepage": "https://github.com/priilau/rakenduste_programmeerimine_2019s#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

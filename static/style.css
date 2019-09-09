@@ -1,0 +1,46 @@
+#header {
+    display: flow-root;
+    background-color: #999999;
+    border-radius: 5px;
+    margin-bottom: 10px
+}
+
+#container {
+    padding: 50px 100px 0px 100px;
+}
+
+#content {
+    /*display: inline;*/
+}
+
+#logo {
+    width: 150px;
+    height: 150px;
+    float: left;
+}
+
+#header-btns {
+    float: right;
+}
+#btn {
+    padding: 5px 10px 5px 10px;
+    margin-top: 10px;
+}
+
+#product {
+    display: inline-block;
+    background-color: #bfbfbf;
+    border-radius: 5px;
+    padding: 15px 10px 15px 10px;
+}
+
+#product-img > img {
+    width: 300px;
+    height: 300px;
+    border-radius: 5px;
+}
+
+#product-name > p {
+    font-size: 18px;
+    font-weight: bold;
+}
