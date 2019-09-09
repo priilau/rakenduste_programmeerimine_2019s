@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const path = require("path");
-const port = 3000
+const PORT = 3000
 
 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, "static", "index.html"));
@@ -9,4 +9,10 @@ app.get('/', (req, res) => {
 
 app.use(express.static("static"));
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+//Heroku portide jaoks
+app.listen(process.env.PORT || PORT, () => {
+    console.log("Server started", PORT);
+});
+
+
+//app.listen(port, () => console.log(`Example app listening on port ${port}!`))
