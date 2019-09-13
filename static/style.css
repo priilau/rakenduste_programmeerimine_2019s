@@ -22,6 +22,7 @@
 #header-btns {
     float: right;
 }
+
 #btn {
     padding: 5px 10px 5px 10px;
     margin-top: 10px;
@@ -42,7 +43,8 @@
     border-radius: 5px;
 }
 
-#product-name > p {
+#product-name {
     font-size: 18px;
     font-weight: bold;
+    padding: 10px 0px 10px 0px;
 }

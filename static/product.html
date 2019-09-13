@@ -5,12 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="style.css">
-        <script>
-            const params = new URLSearchParams(window.location.search);
-            const imgSrc = params.get("imgSrc");
-            const name = params.get("name");
-            const price = params.get("price");
-        </script>
+        <script src="product.js"></script>
         <title id="title"></title>
     </head>
     <body>
@@ -25,24 +20,8 @@
                 </div>
             </div>
             <div id="content">
-                <div id="product">
-                    <div id="product-img"></div>
-                    <div id="product-name"></div>
-                    <div id="product-price"></div>
-                </div>
+                <div id="product"></div>
             </div>
         </div>
     </body>
-    <script>
-        let productImg = document.querySelector("#product-img");
-        productImg.innerHTML = "<img src='" + imgSrc + "' alt='" + name + "'>";
-        let productName = document.querySelector("#product-name");
-        productName.innerHTML = "<p>" + name + "</p>";
-        let productPrice = document.querySelector("#product-price");
-        productPrice.innerHTML = "<p>Hind:" + price + " eur</p>";
-        let title = document.querySelector("#title");
-        title.innerText = name;
-        
-        alert(name + ", " + price + ", " + imgSrc);
-    </script>
 </html>
