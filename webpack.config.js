@@ -1,5 +1,6 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -9,8 +10,25 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
-      new CopyPlugin([{
-          from: "public"
-      }])
-  ]
+    new CleanWebpackPlugin(),
+    new CopyPlugin([{
+        from: "public"
+    }])
+  ],
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 3000
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        }
+      }
+    ]
+  },
 };
