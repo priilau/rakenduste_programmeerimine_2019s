@@ -1,4 +1,4 @@
-const phones = [
+export const phones = [
     {
       "imgSrc": "https://i.ebayimg.com/thumbs/images/m/muy12GyByO1jjY8a1cprZ1g/s-l225.jpg",
       "title": "Brand NEW NOKIA 6300 Cheap Mobile Phone Unlocked 2Yr Warranty - Black/Silv/Gold",
@@ -301,7 +301,7 @@ const phones = [
     }
   ];
 
-  const laptops = [
+  export const laptops = [
     {
       "imgSrc": "https://i.ebayimg.com/thumbs/images/m/mi10P7O5_LXY0KGRQZn7BzA/s-l225.jpg",
       "title": "FAST CHEAP Wi-Fi WINDOWS 10 LAPTOP INTEL CORE i3/i5 4GB/8GB RAM 320GB/500GB HDD",
@@ -603,8 +603,3 @@ const phones = [
       "category": "laptops"
     }
   ];
-
-  module.exports = {
-    phones,
-    laptops
-  }

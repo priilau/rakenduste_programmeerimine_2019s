@@ -29,7 +29,7 @@ const mockItems = [
 const sumOfCost = items => {
     let sum = 0;
     for(let i = 0; i < items.length; i++){
-        sum += JSON.parse(items[i].cost);
+        sum += items[i].cost;
     }
     return sum;
 };
