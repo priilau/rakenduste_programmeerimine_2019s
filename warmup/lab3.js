@@ -21,7 +21,7 @@ const isNumberValid = (inputString, {precision = 9, scale = 0}) => {
         if(result[0].length + result[1].length > precision) {
             return false;
         }
-        if(result[1].length > scale) {
+        if(result[1].length >= scale) {
             return false;
         }
     } else {
