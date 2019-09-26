@@ -54,6 +54,7 @@ utils.test(isNumberValid("10.",{scale: 0}), false); // number valid, but scale t
  * Vaata teste näidete jaoks.
  *
  */
+
 const sumCallback = (a, b, cb) => {
     return cb(a + b);
 };
