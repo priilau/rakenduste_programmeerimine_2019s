@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3000;
 const database = require("./database.js");
 
 app.get("/", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "dist", "index.html"));
+    res.sendFile(path.resolve(__dirname, "../dist", "index.html"));
 });
 
 //Heroku portide jaoks
