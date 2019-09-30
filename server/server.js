@@ -8,15 +8,10 @@ app.get("/", (req, res) => {
     res.sendFile(path.resolve(__dirname, "dist", "index.html"));
 });
 
-app.use(express.static("dist"));
-
 //Heroku portide jaoks
 app.listen(PORT, () => {
     console.log("Server started", PORT);
-});
-
-
-//app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+});S
 
 app.get("/api/items", (req, res)=>{
     res.json(database.GetItems());
@@ -28,4 +23,10 @@ app.get("/items/*", (req, res) => {
 
 app.get("/api/items/:itemId", (req, res)=>{
     res.send(database.GetItem(req.params.itemId));
+});
+
+app.use(express.static("dist"));
+
+app.listen(PORT, () => {
+    console.log(`Server started at port: ${PORT}`);
 });
