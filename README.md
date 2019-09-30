@@ -7,16 +7,18 @@ In the following Code snippet can you please predict the output or If you get an
 
 
 var sum_first = 50 + 20 + ' Sajeesh Sreeni';
+<br>
 var sum_second= "Sajeesh Sreeni " + 50 + 20;
 
-console.log("The first variable sum is :" + sum_first);
+console.log("The first variable sum is :" + sum_first); 
+<br>
 console.log("The second variable sum is :" + sum_second);
     
 
 
 
 <details><summary>Vastus</summary>
-    Answer: This code will not show any error!
+    This code will not show any error!
 
     The output of the code snippet here is:
 
