@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
 //Heroku portide jaoks
 app.listen(PORT, () => {
     console.log("Server started", PORT);
-});S
+});
 
 app.get("/api/items", (req, res)=>{
     res.json(database.GetItems());
