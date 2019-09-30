@@ -604,7 +604,7 @@
     }
   ];
 
-  const GetItems = () => {
+  const getItems = () => {
     const items = [];
     phones.forEach((phone, index) => {
       items.push({
@@ -622,11 +622,11 @@
     return items;
   };
 
-  const GetItem = (itemId) => {
-    return GetItems().find(item => item.id === itemId);
+  const getItem = (itemId) => {
+    return getItems().find(item => item.id === itemId);
   };
 
   module.exports = {
-    GetItems,
-    GetItem
+    getItems,
+    getItem
   };
