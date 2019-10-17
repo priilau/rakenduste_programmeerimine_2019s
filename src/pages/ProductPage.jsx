@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "./Header.jsx";
 import PropTypes from "prop-types";
 
 class ProductPage extends React.PureComponent {
@@ -30,7 +29,6 @@ class ProductPage extends React.PureComponent {
     render() {
         return (
             <React.Fragment>
-                <Header/>
                     <div id="product-description">
                         <div id="product-img">
                             <img src={this.state.imgSrc} alt={this.state.title} />

@@ -1,23 +1,20 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
 const path = require("path");
 const PORT = process.env.PORT || 3000;
-const database = require("./database.js");
 const mongoose = require("mongoose");
-const itemRouter = require("./item.js");
+const itemRouter = require("./item.router.js");
+const userRouter = require("./user.router.js");
+const Item = require("./item.model.js");
+const database = require("./database.js");
 require("dotenv").config();
 const DB_URL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@rp2019-10owc.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
+app.use(bodyParser.json());
 app.use(itemRouter);
-/*
-app.get("/api/items/:itemId", (req, res)=>{
-    res.send(database.getItem(req.params.itemId));
-});
+app.use(userRouter);
 
-app.get("/api/items", (req, res)=>{
-    res.json(database.getItems());
-});
-*/
 app.get("/", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../dist", "index.html"));
 });
@@ -27,11 +24,6 @@ app.get("/items/*", (req, res) => {
 });
 
 app.use(express.static("dist"));
-/*
-app.listen(PORT, () => {
-    console.log(`Server started at port: ${PORT}`);
-});
-*/
 
 function listen() {
     app.listen(PORT, () => {
@@ -43,8 +35,43 @@ function listen() {
 mongoose.connect(DB_URL)
     .then(() => {
         console.log("DB Access success");
+        migrate();
+        //deleteAllItems();
         listen();
     })
     .catch(err => {
         console.log("DB Access error: ", err);
+});
+
+
+function migrate() {
+    Item.count({}, (err, count) => {
+        if(err) {
+            throw err;
+        }
+        if(count > 0) {
+            console.log("Items already exist!");
+            return;
+        }
+        saveAllItems(); 
     });
+}
+/*
+function deleteAllItems() {
+    Item.deleteMany({}, (err, doc) => {
+        console.log("err: ", err, "doc: ", doc);
+    });
+}
+*/
+function saveAllItems() {
+    const items = database.getItems();
+    items.forEach(item => {
+        const document = new Item(item);
+        document.save((err) => {
+            if(err) {
+                throw new Error("Something went wrong while saving!");
+            }
+            console.log("Save success!");
+        });
+    });
+}

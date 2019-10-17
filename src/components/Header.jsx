@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {userIcon, cartIcon} from "./icons.js";
+import {userIcon, cartIcon} from "../icons.js";
 import "./header.css";
 
 const Header = () => {
@@ -10,12 +10,12 @@ const Header = () => {
           <img src="/images/logo.png" id="logo" alt="Logo"/>
         </Link>
         <div id="header-btns">
-          <div id="header-btn">
+          <Link id="header-btn" to={"/login"}>
             <img src = {userIcon} alt="User"/>
-          </div>
-          <div id ="header-btn">
+          </Link>
+          <Link id ="header-btn" to={"/cart"}>
             <img src = {cartIcon} alt="Cart"/>
-          </div>
+          </Link>
         </div>
       </div>
     );

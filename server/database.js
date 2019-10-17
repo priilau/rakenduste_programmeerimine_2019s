@@ -611,18 +611,18 @@
 
   const getItems = () => {
     const items = [];
-    phones.forEach((phone, index) => {
+    phones.forEach((phone/*, index*/) => {
       items.push({
         ...phone,
-        id: "phones-" + index,
+        //id: "phones-" + index,
         price: cleanPrice(phone.price)
       });
     });
 
-    laptops.forEach((laptop, index) => {
+    laptops.forEach((laptop/*, index*/) => {
       items.push({
         ...laptop,
-        id: "laptops-" + index,
+        //id: "laptops-" + index,
         price: cleanPrice(laptop.price)
       });
     });
