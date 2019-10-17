@@ -604,12 +604,18 @@
     }
   ];
 
+  const cleanPrice = (dirty) => {
+    const parts = dirty.split("to");
+    return parts[0].replace("£", "");
+  };
+
   const getItems = () => {
     const items = [];
     phones.forEach((phone, index) => {
       items.push({
         ...phone,
         id: "phones-" + index,
+        price: cleanPrice(phone.price)
       });
     });
 
@@ -617,6 +623,7 @@
       items.push({
         ...laptop,
         id: "laptops-" + index,
+        price: cleanPrice(laptop.price)
       });
     });
     return items;

@@ -1,0 +1,8 @@
+#header {
+    display: flow-root;
+    background-color: #fffc40;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    position: sticky;
+    top: 0;
+}

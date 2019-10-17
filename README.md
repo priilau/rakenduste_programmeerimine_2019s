@@ -26,3 +26,20 @@ console.log("The second variable sum is :" + sum_second);
     The second variable sum is: Sajeesh Sreeni 5020
 </details>
 
+E-poe funktsionaalsed nõuded:
+
+1. Toodete lisamine ostukorvi
+2. Toote koguse muutmine ostukorvis
+3. Toote eemaldamine ostukorvist
+4. Ostukorvi saab uurida
+5. Kasutaja loomine
+6. Kasutajaga sisse logimine
+7. Kasutaja nime uuendamine
+8. Kasutaja parooli uuendamine
+9. Kasutaja emaili uuendamine
+10. Toodete kuvamine esilehel
+11. Toodete kuvamine lehtedena(nool paremale-vasakule või üles-alla)
+12. Toodete kuvamise stiili muutmine (grid või list vms)
+13. Toodete otsing
+14. Toodete filtreerimine vastavalt erinevatele parameetritele
+15. Toote lehel kuvatakse alla suvalisi sarnaseid tooteid

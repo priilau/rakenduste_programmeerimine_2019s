@@ -33,7 +33,7 @@ const ItemList = (props) => {
             {props.title}
           </div>
           <div id="product-price">
-            {props.price}
+            £{props.price}
           </div>
         </div>
       </Link>

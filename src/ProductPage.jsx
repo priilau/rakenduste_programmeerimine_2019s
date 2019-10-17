@@ -39,7 +39,7 @@ class ProductPage extends React.PureComponent {
                             {this.state.title}
                         </div>
                         <div id="product-price">
-                            {this.state.price}
+                        £{this.state.price}
                         </div>
                     </div>
             </React.Fragment>
