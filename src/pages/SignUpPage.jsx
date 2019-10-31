@@ -1,8 +1,13 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import "./signuppage.css";
+import PropTypes from "prop-types";
 
 class SignUpPage extends React.PureComponent {
+    static propTypes = {
+        history: PropTypes.object.isRequired,
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -14,14 +19,17 @@ class SignUpPage extends React.PureComponent {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        fetch("/api/users/signup", {
+        fetch("/api/v1/auth/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(this.state),
-        }).then(res => {
-            console.log(res);
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            this.props.history.push("/login");
         }).catch(err => {
             console.log("Error: ", err);
         });

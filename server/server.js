@@ -4,19 +4,22 @@ const app = express();
 const path = require("path");
 const PORT = process.env.PORT || 3000;
 const mongoose = require("mongoose");
+const authRouter = require("./auth.router.js");
 const itemRouter = require("./item.router.js");
 const userRouter = require("./user.router.js");
 const Item = require("./item.model.js");
 const database = require("./database.js");
+
+if(process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+}
+
 const DB_URL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@rp2019-10owc.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 app.use(bodyParser.json());
-app.use(itemRouter);
-app.use(userRouter);
-
-if(process.env.NODE_ENV !== "production") {
-    require('dotenv').config();
-}
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/", itemRouter);
+app.use("/api/v1/users/", userRouter);
 
 app.get("/", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../dist", "index.html"));

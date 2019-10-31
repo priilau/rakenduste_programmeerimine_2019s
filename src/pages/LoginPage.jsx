@@ -1,8 +1,14 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import "./loginpage.css";
+import PropTypes from "prop-types";
 
 class LoginPage extends React.PureComponent {
+    static propTypes = {
+        history: PropTypes.object.isRequired,
+        onLogin: PropTypes.func.isRequired,
+    }
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -13,14 +19,17 @@ class LoginPage extends React.PureComponent {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        fetch("/api/users/login", {
+        fetch("/api/v1/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(this.state),
-        }).then(res => {
-            console.log(res);
+        })
+        .then(res => res.json())
+        .then(({token, user}) => {
+            this.props.onLogin({token, user});
+            this.props.history.push(`/users/${user._id}`);
         }).catch(err => {
             console.log("Error: ", err);
         });
