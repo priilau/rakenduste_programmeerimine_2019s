@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import "./loginpage.css";
 import PropTypes from "prop-types";
+import "./loginpage.css";
 
 class LoginPage extends React.PureComponent {
     static propTypes = {

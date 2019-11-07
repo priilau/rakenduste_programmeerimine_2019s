@@ -2,10 +2,10 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {userIcon, cartIcon} from "../icons.js";
 import PropTypes from "prop-types";
+import authConsumer from "./authConsumer.jsx";
 import "./header.css";
 
-const Header = ({token, user}) => {
-  console.log("token: ", token);
+const Header = ({user}) => {
   return (
     <div id="header">
       <Link to={"/"}>
@@ -50,4 +50,4 @@ WelcomeIcon.propTypes = {
 user: PropTypes.object.isRequired,
 };
 
-export default Header;
+export default authConsumer(Header);

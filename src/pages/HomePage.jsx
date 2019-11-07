@@ -3,8 +3,8 @@ import ItemList from "../components/ItemList.jsx";
 import Checkbox from "../components/Checkbox.jsx";
 import SortDropdown from "../components/SortDropdown.jsx";
 import PropTypes from "prop-types";
-import "./homepage.css";/*
-import {BrowserRouter, Route, Link} from "react-router-dom";*/
+import { getItems } from "../actions/itemsActions.js";
+import "./homepage.css";
 
 class HomePage extends React.PureComponent {
     constructor(props) {
@@ -13,7 +13,7 @@ class HomePage extends React.PureComponent {
             sortDirection: 1,
             items: [],
             allCategories: ["laptops", "phones"],
-            selectedCategory: ["laptops"]
+            selectedCategories: ["laptops"]
         };
     }
 
@@ -22,10 +22,7 @@ class HomePage extends React.PureComponent {
     }
 
     fetchItems = () => {
-        fetch("/api/v1/items")
-        .then(res => {
-            return res.json();
-        })
+        getItems()
         .then(items => {
             this.setState({
                 items
@@ -37,7 +34,6 @@ class HomePage extends React.PureComponent {
     };
 
     getVisibleItems = () => {
-        console.log(this.state.items);
         return this.state.items
             .filter(item => this.isSelected(item.category))
             .sort((a,b) => {
@@ -51,24 +47,12 @@ class HomePage extends React.PureComponent {
         ;
     }
   
-    handleDropdown = (event) => {
-        /*
-        this.setState({
-            selectedCategory: e.target.value,
-        });
-        */
-        if(this.isSelected(event.target.name)) {
-            const clone = this.state.selectedCategory.slice();
-            const index = this.state.selectedCategory.indexOf(event.target.name);
-            clone.splice(index, 1);
-            this.setState({
-                selectedCategory: clone
-            });
-        } else {
-            this.setState({
-                selectedCategory: this.state.selectedCategory.concat([event.target.name])
-            });
+    handleFilterSelect = (event) => {
+        const categoryName = event.target.name;
+        if(this.isSelected(categoryName)) {
+            return this.unselectCategory(categoryName);
         }
+        this.selectCategory(categoryName);
     }
 
     handleSortDropdown = (event) => {
@@ -77,7 +61,20 @@ class HomePage extends React.PureComponent {
         });
     }
 
-    isSelected = (name) => this.state.selectedCategory.indexOf(name) >= 0;
+    selectCategory = (categoryName) => {
+        this.setState({
+            selectedCategories: this.state.selectedCategories.concat([categoryName])
+        });
+    }
+
+    unselectCategory = (categoryName) => {
+        const newArr = this.state.selectedCategories.filter(cn => cn !== categoryName);
+        this.setState({
+            selectedCategories: newArr
+        });
+    }
+
+    isSelected = (name) => this.state.selectedCategories.indexOf(name) >= 0;
   
     render() {
         const items = this.getVisibleItems();
@@ -85,7 +82,7 @@ class HomePage extends React.PureComponent {
             <React.Fragment>
                 <ItemFilters
                 allCategories = {this.state.allCategories}
-                handleDropdown = {this.handleDropdown}
+                handleDropdown = {this.handleFilterSelect}
                 isSelected = {this.isSelected}
                 />
                 <div className="items-settings">
