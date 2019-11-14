@@ -1,0 +1,22 @@
+.product-img > img {
+    width: 300px;
+    height: 300px;
+    border-radius: 5px;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 0px 10px 0px;
+    word-wrap: break-word;
+    width: 300px;
+    height: 100px;
+}
+
+.product-description {
+    width: 1500px;
+    margin: 0 auto;
+    background-color: #fcffdd;
+    padding: 15px 10px 15px 10px;
+    border-radius: 5px;
+}

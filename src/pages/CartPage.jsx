@@ -1,41 +1,49 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { getItems } from "../actions/itemsActions.js";
+import {connect} from "react-redux";
+import FancyButton from "../components/FancyButton.jsx";
+import {removeItem} from "../store/store.js";
 
 class CartPage extends React.PureComponent {
-    state = {
-        rows: []
-    };
-
-    componentDidMount() {
-        getItems()
-        .then(items => {
-            this.setState({
-                rows: items.slice(0, 4)
-            });
-        })
-        .catch(err => {
-            console.log("Error:", err);
-        });
+    static propTypes = {
+        cart: PropTypes.arrayOf(PropTypes.shape(ItemProps)).isRequired,
+        dispatch: PropTypes.func.isRequired
     }
 
+    handleCheckout = () => {
+        console.log("handleCheckout");
+    }
+
+    handleRemove = (_id) => {
+        this.props.dispatch(removeItem(_id));
+    }
+
+    calcNumbers = () => {
+        const VAT = 20;
+        const subtotal = parseFloat((this.props.cart.reduce((acc, item) => acc + item.price, 0)).toFixed(2));
+        const tax = parseFloat((subtotal / 100 * VAT).toFixed(2));
+        return {
+            subtotal,
+            tax
+        };
+    }
+    
     render() {
+        const {subtotal, tax} = this.calcNumbers();
         return (
             <div>
                 <div>
-                    <Table rows={this.state.rows} />
+                    <Table onRemove={this.handleRemove} rows={this.props.cart} />
                 </div>
                 <div>
                     <table>
                         <tbody>
-                            <tr><td>Subtotal</td><td>£200</td></tr>
-                            <tr><td>Tax</td><td>£23</td></tr>
-                            <tr><td>Total</td><td>£223</td></tr>
+                            <tr><td>Subtotal</td><td>£{subtotal}</td></tr>
+                            <tr><td>Tax</td><td>£{tax}</td></tr>
+                            <tr><td>Total</td><td>£{subtotal + tax}</td></tr>
                             <tr>
                                 <td>
-                                    <div className={"submit-btn"}>
-                                        Checkout
-                                    </div>
+                                    <FancyButton onClick={this.handleCheckout}>Checkout</FancyButton>
                                 </td>
                             </tr>
                         </tbody>
@@ -46,7 +54,7 @@ class CartPage extends React.PureComponent {
     }
 }
 
-const Table = ({rows}) => {
+const Table = ({rows, onRemove}) => {
     return (
         <div>
             <div>
@@ -60,16 +68,17 @@ const Table = ({rows}) => {
                     Price
                 </div>
             </div>
-            {rows.map((row) => <Row key={row._id} {...row} />)}
+            {rows.map((row, index) => <Row onRemove={onRemove} key={index} {...row} />)}
         </div>
     );
 };
 
 Table.propTypes = {
-    rows: PropTypes.array.isRequired
+    rows: PropTypes.array.isRequired,
+    onRemove: PropTypes.func.isRequired
 };
 
-const Row = ({title, imgSrc, category, price}) => {
+const Row = ({_id, title, imgSrc, category, price, onRemove}) => {
     return (
         <div className={"row"}>
             <div>
@@ -84,11 +93,23 @@ const Row = ({title, imgSrc, category, price}) => {
             <div>
                 £{price}
             </div>
+            <div>
+                <FancyButton onClick={() => onRemove(_id)}>Remove</FancyButton>
+            </div>
         </div>
     );
 };
 
-Row.propTypes = ItemProps;
+const mapStateToProps = (store) => {
+    return {
+        cart: store.cart
+    };
+};
+
+Row.propTypes = {
+    ...ItemProps,
+    onRemove: PropTypes.func.isRequired
+};
 
 export const ItemProps = {
     _id: PropTypes.string.isRequired,
@@ -98,4 +119,4 @@ export const ItemProps = {
     price: PropTypes.number.isRequired,
 };
 
-export default CartPage;
+export default connect(mapStateToProps)(CartPage);

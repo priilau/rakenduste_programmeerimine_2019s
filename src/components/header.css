@@ -6,3 +6,11 @@
     position: sticky;
     top: 0;
 }
+
+.badge {
+    position: absolute;
+    padding: 2px 6px;
+    background: orange;
+    bottom: 20px;
+    border-radius: 100%;
+}
