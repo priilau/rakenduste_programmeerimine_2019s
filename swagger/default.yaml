@@ -3,8 +3,79 @@ info:
   title: Saastapood
   description: "rp2019s ajal loodud e-pood"
   version: "1.0.0"
+servers: 
+  - url: localhost:3000/api/v1
+security: 
+  - bearerAuth: []
 paths:
-  /api/v1/login:
+  /items/{itemId}:
+    get:
+      operationId: getItem
+      summary: Returns an item object
+      parameters:
+        - $ref: "#/components/parameters/itemIdParam"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+        403:
+          description: Forbidden
+        500:
+          description: err
+  /users/{userId}:
+    get:
+      operationId: getUser
+      summary: Returns an user object
+      security: 
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/userIdParam"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        403:
+          description: Forbidden
+        500:
+          description: err
+  /users/{userId}/cart/{itemId}:
+    put: 
+      operationId: addItemToCart
+      summary: Adds item to cart
+      security: 
+        - bearerAuth: []
+      parameters: 
+        - $ref: "#/components/parameters/userIdParam"
+        - $ref: "#/components/parameters/itemIdParam"
+      responses:
+        200:
+          description: OK
+        403:
+          description: Forbidden
+        500:
+          description: err
+    delete: 
+      operationId: removeItemFromCart
+      summary: Removes item from cart
+      security: 
+        - bearerAuth: []
+      parameters: 
+        - $ref: "#/components/parameters/userIdParam"
+        - $ref: "#/components/parameters/itemIdParam"
+      responses:
+        200:
+          description: OK
+        403:
+          description: Forbidden
+        500:
+          description: err
+  /login:
     post:
       operationId: login
       summary: User logs in
@@ -44,7 +115,7 @@ paths:
         401:
           description: Unauthorized
   
-  /api/v1/signup:
+  /signup:
     post:
       operationId: signup
       summary: User signs up
@@ -69,3 +140,47 @@ paths:
           description: bad email or password
         401:
           description: unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+        createdAt:
+          type: string
+        cart:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+    Item:
+      type: object
+      properties:
+        _id:
+          type: string
+        createdAt:
+          type: string
+        price:
+          type: string
+        title:
+          type: string
+  parameters:
+    userIdParam:
+      in: path
+      name: userId
+      schema: 
+        type: string
+      required: true
+    itemIdParam:
+      in: path
+      name: itemId
+      schema: 
+        type: string
+      required: true

@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import FancyButton from "../components/FancyButton.jsx";
-import {removeItem} from "../store/store.js";
+import {removeItem} from "../store/actions.js";
+import {toast} from "react-toastify";
 import "./cartpage.css";
 
 class CartPage extends React.PureComponent {
@@ -16,6 +17,7 @@ class CartPage extends React.PureComponent {
     }
 
     handleRemove = (_id) => {
+        toast.success("Item removed!", {position: "bottom-right"});
         this.props.dispatch(removeItem(_id));
     }
 

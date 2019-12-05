@@ -1,7 +1,8 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import "./signuppage.css";
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
+import "./signuppage.css";
 
 class SignUpPage extends React.PureComponent {
     static propTypes = {
@@ -27,10 +28,12 @@ class SignUpPage extends React.PureComponent {
             body: JSON.stringify(this.state),
         })
         .then(res => res.json())
-        .then(data => {
-            console.log(data);
+        .then(() => {
+            toast.success("Sign up success!", {position: "bottom-right"});
             this.props.history.push("/login");
-        }).catch(err => {
+        })
+        .catch(err => {
+            toast.error("Sign up failed!", {position: "bottom-right"});
             console.log("Error: ", err);
         });
     }
@@ -48,7 +51,7 @@ class SignUpPage extends React.PureComponent {
                 <input type={"email"} name="email"  onChange={this.handleChange} placeholder="email" value={this.state.email} />
                 <input type={"password"} name="password" onChange={this.handleChange} placeholder="password" value={this.state.password} />
                 <input type={"password"} name="confirmPassword" onChange={this.handleChange} placeholder="confirm password" value={this.state.confirmPassword} />
-                <input type="submit" value="Sign up"/>
+                <input className={"submit"} type="submit" value="Sign up"/>
                 <div className="message">
                     Already registered?
                     <Link to={"/login"}>Log in here!</Link>

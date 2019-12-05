@@ -16,10 +16,13 @@
     align-self: flex-end;
 }
 
+.submit {
+    color: #fff;
+}
+
 input {
     border: 0;
     font: inherit;
-    color: #fff;
 }
 input::placeholder {
     color: #7e8ba3;
