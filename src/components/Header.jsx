@@ -9,15 +9,15 @@ import "./header.css";
 
 const Header = ({user, cart}) => {
   return (
-    <div id="header">
+    <div className="header">
       <Link to={"/"}>
-        <img src="/images/logo.png" id="logo" alt="Logo"/>
+        <img src="/images/logo.png" className="logo" alt="Logo"/>
       </Link>
-      <div id="header-btns">
+      <div className="header-btns">
         {user.email && <WelcomeIcon user={user} />}
         {!user.email && <LoginRegisterIcon />}
         
-        <Link id ="header-btn" to={"/cart"}>
+        <Link className="header-btn" to={"/cart"}>
           <Badge>{cart.length}</Badge>
           <img src={cartIcon} alt="Cart"/>
         </Link>
@@ -34,7 +34,7 @@ Header.propTypes = {
 
 const LoginRegisterIcon = () => {
   return(
-    <Link id="header-btn" to={"/login"}>
+    <Link className="header-btn" to={"/login"}>
       <img src = {userIcon} alt="User"/>
       <div className={"header-btn-text"}>Login /<br/>Register</div>
     </Link>
@@ -43,7 +43,7 @@ const LoginRegisterIcon = () => {
 
 const WelcomeIcon = ({user}) => {
   return(
-    <Link id="header-btn" to={`/users/${user._id}`}>
+    <Link className="header-btn" to={`/users/${user._id}`}>
       <img src = {userIcon} alt="User"/>
       <div className={"header-btn-text"}>Welcome, {user.email}</div>
     </Link>

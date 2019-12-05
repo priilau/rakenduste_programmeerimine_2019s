@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import FancyButton from "../components/FancyButton.jsx";
 import {removeItem} from "../store/store.js";
+import "./cartpage.css";
 
 class CartPage extends React.PureComponent {
     static propTypes = {
@@ -31,7 +32,7 @@ class CartPage extends React.PureComponent {
     render() {
         const {subtotal, tax} = this.calcNumbers();
         return (
-            <div>
+            <div className={"cart-content"}>
                 <div>
                     <Table onRemove={this.handleRemove} rows={this.props.cart} />
                 </div>
@@ -56,18 +57,24 @@ class CartPage extends React.PureComponent {
 
 const Table = ({rows, onRemove}) => {
     return (
-        <div>
-            <div>
-                <div>
-                    Product
-                </div>
-                <div>
-                    Category
-                </div>
-                <div>
-                    Price
-                </div>
-            </div>
+        <div className={"cart-table"}>
+            <table className={"cart-table-header"}>
+                <tbody>
+                    <tr>
+                        <th>
+                            Product
+                        </th>
+                        <th>
+                            Category
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th></th>
+                    </tr>
+                </tbody>
+                
+            </table>
             {rows.map((row, index) => <Row onRemove={onRemove} key={index} {...row} />)}
         </div>
     );
@@ -81,19 +88,19 @@ Table.propTypes = {
 const Row = ({_id, title, imgSrc, category, price, onRemove}) => {
     return (
         <div className={"row"}>
-            <div>
+            <div className={"product-img"}>
                 <img src={imgSrc} alt="ProductImg"/>
             </div>
-            <div>
+            <div className={"product-title"}>
                 {title}
             </div>
-            <div>
+            <div className={"product-category"}>
                 {category}
             </div>
-            <div>
+            <div className={"product-price"}>
                 £{price}
             </div>
-            <div>
+            <div className={"remove-btn"}>
                 <FancyButton onClick={() => onRemove(_id)}>Remove</FancyButton>
             </div>
         </div>

@@ -5,9 +5,9 @@ import "./checkbox.css";
 const Checkbox = ({name, onChange, checked}) => {
     return(
         <div className="item-filters-wrapper">
-            <div className="center">
+            <div className="category-toggle">
                 <div>{name}</div>
-                <input type="checkbox" id={name} name={name} style={{display: "none"}} onChange={onChange} checked={checked} />
+                <input type="checkbox" className={"cbx"} id={name} name={name} style={{display: "none"}} onChange={onChange} checked={checked} />
                 <label htmlFor={name} className="toggle"><span></span></label>   
             </div>
         </div>

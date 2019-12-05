@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 
 const ItemList = (props) => {
     return (
-      <div id="content">
-        <div id="products"> 
+      <div className="content">
+        <div className="products"> 
           {
             props.items.map(item => {
               return <Item
@@ -25,14 +25,14 @@ const ItemList = (props) => {
   const Item = (props) => {
     return (
       <Link to={`/items/${props.id}`}>
-        <div id="product">
-          <div id="product-img">
+        <div className="product">
+          <div className="product-img">
             <img src={props.imgSrc} alt={props.title}/>
           </div>
-          <div id="product-name">
+          <div className="product-name">
             {props.title}
           </div>
-          <div id="product-price">
+          <div className="product-price">
             £{props.price}
           </div>
         </div>

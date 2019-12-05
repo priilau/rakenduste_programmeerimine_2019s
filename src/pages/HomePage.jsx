@@ -74,18 +74,19 @@ class HomePage extends React.PureComponent {
         const items = this.getVisibleItems();
         return (
             <React.Fragment>
-                <ItemFilters
-                allCategories = {this.state.allCategories}
-                handleDropdown = {this.handleFilterSelect}
-                isSelected = {this.isSelected}
-                />
                 <div className="items-settings">
-                    <div>
+                    <div className="items-found">
                         Items found: {items.length}
                     </div>
                     <SortDropdown
                         direction = {this.state.sortDirection}
                         onChange = {this.handleSortDropdown}
+                    />
+                    <div className={"categories"}>All categories:</div>
+                    <ItemFilters
+                    allCategories = {this.state.allCategories}
+                    handleDropdown = {this.handleFilterSelect}
+                    isSelected = {this.isSelected}
                     />
                 </div>
                 <ItemList items={items}/>

@@ -43,7 +43,8 @@ class SignUpPage extends React.PureComponent {
 
     render() {
         return (
-            <form className={"signup-wrapper"} onSubmit={this.handleSubmit}>
+            <div className={"signup"}>
+                <form className={"signup-wrapper"} onSubmit={this.handleSubmit}>
                 <input type={"email"} name="email"  onChange={this.handleChange} placeholder="email" value={this.state.email} />
                 <input type={"password"} name="password" onChange={this.handleChange} placeholder="password" value={this.state.password} />
                 <input type={"password"} name="confirmPassword" onChange={this.handleChange} placeholder="confirm password" value={this.state.confirmPassword} />
@@ -52,7 +53,8 @@ class SignUpPage extends React.PureComponent {
                     Already registered?
                     <Link to={"/login"}>Log in here!</Link>
                 </div>
-            </form>
+                </form>
+            </div>
         );
     }
 }

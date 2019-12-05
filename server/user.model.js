@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.statics.login = function({email, password}) {
-    console.log(email, password);
     return new Promise((resolve, reject) => {
         this.findOne({email}, (err, userDoc) => {
             if(err) {

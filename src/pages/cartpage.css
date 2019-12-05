@@ -1,0 +1,12 @@
+.cart-content {
+    width: 1500px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 15px 10px 15px 10px;
+    border-radius: 5px;
+}
+
+.cart-table-header > tbody > tr > th {
+    width: 500px;
+    text-align: center;
+}

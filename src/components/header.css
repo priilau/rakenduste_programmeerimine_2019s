@@ -1,16 +1,25 @@
-#header {
+.header {
     display: flow-root;
-    background-color: #fffc40;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    background-color: #232f3e;
     position: sticky;
     top: 0;
+}
+
+.header-btns {
+    float: right;
+    padding: 20px;
+    display: flex;
+}
+
+.header-btn > img{
+    width: 50px;
+    height: 50px;
 }
 
 .badge {
     position: absolute;
     padding: 2px 6px;
-    background: orange;
+    background: #ffcc40;
     bottom: 20px;
     border-radius: 100%;
 }
