@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
+import * as services from "../services.js";
 import "./signuppage.css";
 
 class SignUpPage extends React.PureComponent {
@@ -20,20 +21,13 @@ class SignUpPage extends React.PureComponent {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        fetch("/api/v1/auth/signup", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(this.state),
-        })
-        .then(res => res.json())
+        services.signup(this.state)
         .then(() => {
-            toast.success("Sign up success!", {position: "bottom-right"});
+            toast.success("Signup success!", {position: "bottom-right"});
             this.props.history.push("/login");
         })
         .catch(err => {
-            toast.error("Sign up failed!", {position: "bottom-right"});
+            toast.error("Signup failed!", {position: "bottom-right"});
             console.log("Error: ", err);
         });
     }

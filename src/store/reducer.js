@@ -5,14 +5,12 @@ export const UserPropTypes = {
     _id: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
+    cart: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 const initialState = {
     token: null,
     user: null,
-    cart: [
-      //items
-    ],
     items: []
   };
   
@@ -37,13 +35,13 @@ export const reducer = (state = initialState, action) => {
         case ITEM_REMOVED: {
         return {
             ...state,
-            cart: removeItemById(state.cart, action.payload)
+            user: removeItemFromCart(state.user, action.payload)
         };
         }
         case ITEM_ADDED: {
         return {
             ...state,
-            cart: state.cart.concat([action.payload])
+            user: addItemToCart(state.user, action.payload)
         };
         }
         default: {
@@ -52,12 +50,22 @@ export const reducer = (state = initialState, action) => {
     }
 };
 
-const removeItemById = (items, _id) => {
-    const index = items.findIndex(item => item._id === _id);
+const addItemToCart = (user, itemId) => {
+    return {
+        ...user,
+        cart: user.cart.concat([itemId])
+    };
+};
+
+const removeItemFromCart = (user, itemId) => {
+    const index = user.cart.findIndex(cartId => cartId === itemId);
     if(index === -1) {
-        return items;
+        return user;
     }
-    const copy = items.slice();
-    copy.splice(index, 1);
-    return copy;
+    const cartCopy = user.cart.slice();
+    cartCopy.splice(index, 1);
+    return {
+        ...user,
+        cart: cartCopy
+    };
 };

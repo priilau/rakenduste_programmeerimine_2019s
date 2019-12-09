@@ -2,8 +2,9 @@ import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import { userUpdate } from "../store/actions.js";
+import { userUpdate, tokenUpdate } from "../store/actions.js";
 import {toast} from "react-toastify";
+import * as services from "../services.js";
 import "./loginpage.css";
 
 class LoginPage extends React.PureComponent {
@@ -22,14 +23,7 @@ class LoginPage extends React.PureComponent {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        fetch("/api/v1/auth/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(this.state),
-        })
-        .then(res => res.json())
+        services.login(this.state)
         .then(this.handleSuccess)
         .catch(err => {
             toast.error("Login failed!", {position: "bottom-right"});
@@ -38,8 +32,8 @@ class LoginPage extends React.PureComponent {
     }
 
     handleSuccess = ({token, user}) => {
-        console.log(token);
         this.props.dispatch(userUpdate(user));
+        this.props.dispatch(tokenUpdate(token));
         this.props.history.push(`/users/${user._id}`);
     }
 

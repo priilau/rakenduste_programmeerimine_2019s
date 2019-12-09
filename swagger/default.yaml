@@ -8,6 +8,23 @@ servers:
 security: 
   - bearerAuth: []
 paths:
+  /items:
+    get:
+      operationId: getItems
+      summary: Returns a list of items
+      parameters:
+        - $ref: "#/components/parameters/itemIdParam"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Item"
+        500:
+          description: err
   /items/{itemId}:
     get:
       operationId: getItem
@@ -21,8 +38,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Item"
-        403:
-          description: Forbidden
         500:
           description: err
   /users/{userId}:
@@ -75,7 +90,7 @@ paths:
           description: Forbidden
         500:
           description: err
-  /login:
+  /auth/login:
     post:
       operationId: login
       summary: User logs in
@@ -115,7 +130,7 @@ paths:
         401:
           description: Unauthorized
   
-  /signup:
+  /auth/signup:
     post:
       operationId: signup
       summary: User signs up

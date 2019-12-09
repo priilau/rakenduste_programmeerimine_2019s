@@ -4,12 +4,30 @@ import {connect} from "react-redux";
 import FancyButton from "../components/FancyButton.jsx";
 import {removeItem} from "../store/actions.js";
 import {toast} from "react-toastify";
+import * as selectors from "../store/selectors.js";
+import * as services from "../services.js";
 import "./cartpage.css";
 
 class CartPage extends React.PureComponent {
     static propTypes = {
-        cart: PropTypes.arrayOf(PropTypes.shape(ItemProps)).isRequired,
+        cartItemIds: PropTypes.arrayOf(PropTypes.string).isRequired,
         dispatch: PropTypes.func.isRequired
+    }
+
+    state = {
+        cartItems: [],
+    }
+
+    componentDidMount() {
+        this.fetchItems();
+    }
+
+    componentDidUpdate(prevProps) {
+        const prevPropIds = prevProps.cartItemIds.join("");
+        const currentIds = this.props.cartItemIds.join("");
+        if(prevPropIds !== currentIds) {
+            this.fetchItems();
+        }
     }
 
     handleCheckout = () => {
@@ -17,18 +35,31 @@ class CartPage extends React.PureComponent {
     }
 
     handleRemove = (_id) => {
-        toast.success("Item removed!", {position: "bottom-right"});
         this.props.dispatch(removeItem(_id));
     }
 
     calcNumbers = () => {
         const VAT = 20;
-        const subtotal = parseFloat((this.props.cart.reduce((acc, item) => acc + item.price, 0)).toFixed(2));
+        const subtotal = parseFloat((this.state.cartItems.reduce((acc, item) => acc + item.price, 0)).toFixed(2));
         const tax = parseFloat((subtotal / 100 * VAT).toFixed(2));
         return {
             subtotal,
             tax
         };
+    }
+
+    fetchItems = () => {
+        const promises = this.props.cartItemIds.map(itemId => services.getItem({itemId}));
+        Promise.all(promises)
+        .then(items => {
+            this.setState({
+                cartItems: items,
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error("Failed fetching items!", {position: "bottom-right"});
+        });
     }
     
     render() {
@@ -36,7 +67,7 @@ class CartPage extends React.PureComponent {
         return (
             <div className={"cart-content"}>
                 <div>
-                    <Table onRemove={this.handleRemove} rows={this.props.cart} />
+                    <Table onRemove={this.handleRemove} rows={this.state.cartItems} />
                 </div>
                 <div>
                     <table>
@@ -111,7 +142,7 @@ const Row = ({_id, title, imgSrc, category, price, onRemove}) => {
 
 const mapStateToProps = (store) => {
     return {
-        cart: store.cart
+        cartItemIds: selectors.getCart(store)
     };
 };
 

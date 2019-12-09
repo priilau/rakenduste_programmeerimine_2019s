@@ -6,6 +6,7 @@ import Checkbox from "../components/Checkbox.jsx";
 import SortDropdown from "../components/SortDropdown.jsx";
 import {ItemProps} from "./CartPage.jsx";
 import {getItems} from "../store/actions.js";
+import * as selectors from "../store/selectors.js";
 import "./homepage.css";
 
 class HomePage extends React.PureComponent {
@@ -117,7 +118,7 @@ ItemFilters.propTypes = {
 
 const mapStateToProps = (store) => {
     return {
-        items: store.items
+        items: selectors.getItems(store)
     };
 };
 
