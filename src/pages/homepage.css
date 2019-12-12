@@ -3,6 +3,11 @@
     padding: 10px;
 }
 
+.content-wrapper {
+    position: sticky;
+    top: 160px;
+}
+
 .items-settings {
     float: left;
     width: 200px;
@@ -27,4 +32,79 @@
 
 .categories {
     font-weight: 600;
+}
+
+
+.grid {
+    min-width: 1325px;
+}
+
+.product {
+    text-decoration: none;
+    color: #000000;
+    display: inline-block;
+    background: #fff;
+    padding: 15px 10px 15px 10px;
+    margin: 10px 5px 10px 5px;
+    position: relative;
+}
+
+.product-img > img {
+    width: 300px;
+    height: 300px;
+    border-radius: 5px;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 0px 10px 0px;
+    word-wrap: break-word;
+    width: 300px;
+    padding: 10px 0px 10px 0px;
+}
+
+.product-price {
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 15px;
+}
+
+.slick-slide .product {
+    height: 425px;
+}
+
+.slick-slide > div {
+    display: inline-flex;
+}
+
+.slick-slide a{
+    margin: auto;
+}
+
+.gridview {
+    position: sticky;
+    top: 160px;
+    padding: 15px;
+}
+
+.gridview-btn {
+    float: right;
+    width: 30px;
+    height: 30px;
+}
+
+.gridview-btn:hover {
+    opacity: 70%;
+    transition-duration: 100ms;
+}
+
+.product-left {
+    width: 325px;
+    float: left;
+}
+
+.product-right {
+    margin-left: 325px;
 }

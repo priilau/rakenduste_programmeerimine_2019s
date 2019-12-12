@@ -3,6 +3,14 @@
     background-color: #232f3e;
     position: sticky;
     top: 0;
+    z-index: 950
+}
+
+.header-btn-text {
+    padding: 0px 5px 0px 5px;
+    display: inline-block;
+    position: relative;
+    transform: translateY(-100%);
 }
 
 .header-btns {
@@ -10,8 +18,11 @@
     padding: 20px;
     display: flex;
 }
-
+.header-btn {
+    transform: translateY(50%);
+}
 .header-btn > img{
+    filter: invert();
     width: 50px;
     height: 50px;
 }
@@ -20,6 +31,13 @@
     position: absolute;
     padding: 2px 6px;
     background: #ffcc40;
-    bottom: 20px;
     border-radius: 100%;
+    z-index: 950;
+    bottom: 0;
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+    float: left;
 }

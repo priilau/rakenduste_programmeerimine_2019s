@@ -1,0 +1,14 @@
+.user-container {
+    width: 500px;
+    height: 200px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 15px 10px 15px 10px;
+    position: relative;
+}
+
+.user-container .submit-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}

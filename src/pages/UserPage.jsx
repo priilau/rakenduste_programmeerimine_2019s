@@ -6,6 +6,7 @@ import FancyButton from "../components/FancyButton.jsx";
 import { userUpdate, tokenUpdate } from "../store/actions";
 import protectedRedirect from "../components/protectedRedirect.jsx";
 import * as selectors from "../store/selectors.js";
+import "./userpage.css";
 
 class UserPage extends React.PureComponent {
     static propTypes = {
@@ -19,11 +20,13 @@ class UserPage extends React.PureComponent {
 
     render() {
         return (
-            <div>
-                <div>
-                    Logged in as: {this.props.user.email}, created at {this.props.user.createdAt}
+            <div className={"content"}>
+                <div className={"user-container"}>
+                    <div className={"welcome"}>
+                        Logged in as: {this.props.user.email}, created at {this.props.user.createdAt}
+                    </div>
+                    <FancyButton onClick={this.handleLogout}>Log out</FancyButton>
                 </div>
-                <FancyButton onClick={this.handleLogout}>Log out</FancyButton>
             </div>
         );
     }

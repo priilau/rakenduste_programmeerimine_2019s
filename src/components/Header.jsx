@@ -37,7 +37,7 @@ const LoginRegisterIcon = () => {
   return(
     <Link className="header-btn" to={"/login"}>
       <img src = {userIcon} alt="User"/>
-      <div className={"header-btn-text"}>Login /<br/>Register</div>
+      <div className={"header-btn-text"}>Login / Register</div>
     </Link>
   );
 };

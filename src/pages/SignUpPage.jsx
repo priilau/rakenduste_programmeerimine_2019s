@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import * as services from "../services.js";
+import FancyButton from "../components/FancyButton.jsx";
 import "./signuppage.css";
 
 class SignUpPage extends React.PureComponent {
@@ -45,7 +46,7 @@ class SignUpPage extends React.PureComponent {
                 <input type={"email"} name="email"  onChange={this.handleChange} placeholder="email" value={this.state.email} />
                 <input type={"password"} name="password" onChange={this.handleChange} placeholder="password" value={this.state.password} />
                 <input type={"password"} name="confirmPassword" onChange={this.handleChange} placeholder="confirm password" value={this.state.confirmPassword} />
-                <input className={"submit"} type="submit" value="Sign up"/>
+                <FancyButton onClick={this.handleSubmit}>Sign up</FancyButton>
                 <div className="message">
                     Already registered?
                     <Link to={"/login"}>Log in here!</Link>

@@ -1,22 +1,26 @@
-.product-img > img {
-    width: 300px;
-    height: 300px;
-    border-radius: 5px;
-}
-
-.product-name {
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px 0px 10px 0px;
-    word-wrap: break-word;
-    width: 300px;
-    height: 100px;
-}
-
-.product-description {
+.product-page {
     width: 1500px;
+    height: 300px;
     margin: 0 auto;
     background-color: #fff;
     padding: 15px 10px 15px 10px;
-    border-radius: 5px;
+    position: relative;
+}
+
+.product-right .product-name {
+    width: auto;
+}
+
+.bottom-row {
+    bottom: 0;
+}
+
+.bottom-row-right {
+    float: right;
+}
+
+.bottom-row-right .submit-btn {
+    bottom: 15px;
+    right: 10px;
+    position: absolute;
 }

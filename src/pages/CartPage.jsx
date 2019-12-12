@@ -65,16 +65,16 @@ class CartPage extends React.PureComponent {
     render() {
         const {subtotal, tax} = this.calcNumbers();
         return (
-            <div className={"cart-content"}>
-                <div>
+            <div className={"content"}>
+                <div className={"cart-container"}>
                     <Table onRemove={this.handleRemove} rows={this.state.cartItems} />
                 </div>
-                <div>
+                <div className={"checkout"}>
                     <table>
                         <tbody>
-                            <tr><td>Subtotal</td><td>£{subtotal}</td></tr>
-                            <tr><td>Tax</td><td>£{tax}</td></tr>
-                            <tr><td>Total</td><td>£{subtotal + tax}</td></tr>
+                            <tr><td>Subtotal:</td><td className={"sum"}>£{subtotal}</td></tr>
+                            <tr><td>Tax:</td><td className={"sum"}>£{tax}</td></tr>
+                            <tr><td>Total:</td><td className={"sum"}>£{subtotal + tax}</td></tr>
                             <tr>
                                 <td>
                                     <FancyButton onClick={this.handleCheckout}>Checkout</FancyButton>
@@ -90,24 +90,8 @@ class CartPage extends React.PureComponent {
 
 const Table = ({rows, onRemove}) => {
     return (
-        <div className={"cart-table"}>
-            <table className={"cart-table-header"}>
-                <tbody>
-                    <tr>
-                        <th>
-                            Product
-                        </th>
-                        <th>
-                            Category
-                        </th>
-                        <th>
-                            Price
-                        </th>
-                        <th></th>
-                    </tr>
-                </tbody>
-                
-            </table>
+        <div className={"cart"}>
+            <div className={"cart-header"}>Items currently in your cart</div>
             {rows.map((row, index) => <Row onRemove={onRemove} key={index} {...row} />)}
         </div>
     );
@@ -121,20 +105,24 @@ Table.propTypes = {
 const Row = ({_id, title, imgSrc, category, price, onRemove}) => {
     return (
         <div className={"row"}>
-            <div className={"product-img"}>
-                <img src={imgSrc} alt="ProductImg"/>
+            <div className={"row-left"}>
+                <div className={"product-thumb"}>
+                    <img src={imgSrc} alt="ProductImg"/>
+                </div>
             </div>
-            <div className={"product-title"}>
-                {title}
-            </div>
-            <div className={"product-category"}>
-                {category}
-            </div>
-            <div className={"product-price"}>
-                £{price}
-            </div>
-            <div className={"remove-btn"}>
-                <FancyButton onClick={() => onRemove(_id)}>Remove</FancyButton>
+            <div className={"row-right"}>
+                <div className={"product-name"}>
+                    {title}
+                </div>
+                <div className={"product-category"}>
+                    Category: {category}
+                </div>
+                <div className={"product-price"}>
+                    Price: £{price}
+                </div>
+                <div className={"remove-btn"}>
+                    <FancyButton onClick={() => onRemove(_id)}>Remove</FancyButton>
+                </div>
             </div>
         </div>
     );

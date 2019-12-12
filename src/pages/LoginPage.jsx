@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import { userUpdate, tokenUpdate } from "../store/actions.js";
 import {toast} from "react-toastify";
+import FancyButton from "../components/FancyButton.jsx";
 import * as services from "../services.js";
 import "./loginpage.css";
 
@@ -49,7 +50,7 @@ class LoginPage extends React.PureComponent {
                 <form className={"login-wrapper"} onSubmit={this.handleSubmit}>
                     <input type={"email"} name="email" onChange={this.handleChange} placeholder="email" value={this.state.email} />
                     <input type={"password"} name="password" onChange={this.handleChange} placeholder="password" value={this.state.password} />
-                    <input className={"submit"} type="submit" value="Log in"/>
+                    <FancyButton onClick={this.handleSubmit}>Log in</FancyButton>
                     <div className="message">
                         Not registered?
                         <Link to={"/signup"}>Create an account!</Link>
